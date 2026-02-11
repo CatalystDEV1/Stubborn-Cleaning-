@@ -271,7 +271,7 @@
             100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
         }
         
-        /* Services Section */
+        /* Services Carousel Section */
         .section {
             padding: 100px 0;
         }
@@ -309,19 +309,38 @@
             margin-right: auto;
         }
         
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-            margin-top: 30px;
+        /* Services Carousel */
+        .services-carousel-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .services-carousel {
+            display: flex;
+            animation: scroll 45s linear infinite;
+            width: calc(280px * 14);
+            gap: 30px;
+            padding: 20px 0;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-280px * 7)); }
         }
         
         .service-card {
+            min-width: 280px;
             background: white;
             border-radius: var(--radius);
-            overflow: hidden;
+            padding: 35px 30px;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
         }
         
         .service-card:hover {
@@ -329,55 +348,69 @@
             box-shadow: var(--shadow-hover);
         }
         
-        .service-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .service-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .service-card:hover .service-img img {
-            transform: scale(1.1);
-        }
-        
-        .service-content {
-            padding: 25px;
-        }
-        
         .service-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(37, 99, 235, 0.1);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(29, 78, 216, 0.1));
             border-radius: var(--radius-circle);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            margin: 0 auto 25px;
             color: var(--primary);
-            font-size: 1.5rem;
+            font-size: 2rem;
+            flex-shrink: 0;
         }
         
         .service-content h3 {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             margin-bottom: 15px;
+            color: var(--secondary);
         }
         
         .service-content p {
             color: var(--gray);
             margin-bottom: 20px;
+            font-size: 1.05rem;
         }
         
         .service-price {
             display: block;
             font-weight: 700;
             color: var(--primary);
-            font-size: 1.3rem;
-            margin-top: 10px;
+            font-size: 1.4rem;
+            margin: 15px 0;
+            padding: 12px 0;
+            border-top: 1px solid var(--light-gray);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: var(--radius-circle);
+            background: var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        /* Pause animation on hover */
+        .services-carousel-container:hover .services-carousel {
+            animation-play-state: paused;
         }
         
         /* USP Section */
@@ -864,6 +897,16 @@
             .hero p {
                 font-size: 1.35rem;
             }
+            
+            .services-carousel {
+                width: calc(250px * 14);
+                animation-duration: 50s;
+            }
+            
+            .service-card {
+                min-width: 250px;
+                padding: 30px 25px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -930,6 +973,23 @@
                 margin-right: 5px;
             }
             
+            .services-carousel {
+                width: calc(230px * 14);
+                animation-duration: 55s;
+                gap: 20px;
+            }
+            
+            .service-card {
+                min-width: 230px;
+                padding: 25px 20px;
+            }
+            
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.7rem;
+            }
+            
             .contact-form-container, .contact-info {
                 padding: 30px;
             }
@@ -964,8 +1024,23 @@
                 font-size: 1.7rem;
             }
             
+            .services-carousel {
+                width: calc(280px * 14);
+                animation-duration: 60s;
+                padding: 10px 0;
+            }
+            
+            .service-card {
+                min-width: 280px;
+                padding: 25px 20px;
+            }
+            
             .contact-form-container {
                 padding: 25px;
+            }
+            
+            .carousel-dots {
+                display: none;
             }
         }
     </style>
@@ -1017,7 +1092,7 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services Carousel Section -->
     <section class="section" id="services">
         <div class="container">
             <div class="section-title">
@@ -1025,110 +1100,199 @@
                 <p>Specialized cleaning solutions for every surface and space - all completed with eco-friendly products and professional equipment</p>
             </div>
             
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Carpet Cleaning">
-                    </div>
-                    <div class="service-content">
+            <div class="services-carousel-container">
+                <div class="services-carousel">
+                    <!-- Service 1: Carpet & Rug Cleaning -->
+                    <div class="service-card">
                         <div class="service-icon">
                             <i class="fas fa-couch"></i>
                         </div>
-                        <h3>Carpet & Rug Cleaning</h3>
-                        <p>Deep cleaning, sanitizing and deodorizing for all types of carpets and rugs using advanced extraction methods.</p>
-                        <span class="service-price">From $89</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="service-content">
+                            <h3>Carpet & Rug Cleaning</h3>
+                            <p>Deep cleaning, sanitizing and deodorizing for all types of carpets and rugs using advanced extraction methods.</p>
+                            <span class="service-price">From $89</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1584621881583-1c3e7d4c0c35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Lounge Cleaning">
-                    </div>
-                    <div class="service-content">
+                    
+                    <!-- Service 2: Lounge Cleaning -->
+                    <div class="service-card">
                         <div class="service-icon">
                             <i class="fas fa-chair"></i>
                         </div>
-                        <h3>Lounge Cleaning</h3>
-                        <p>Fabric or leather sofa cleaning with specialized techniques to remove stains, odors and restore comfort.</p>
-                        <span class="service-price">From $129</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="service-content">
+                            <h3>Lounge Cleaning</h3>
+                            <p>Fabric or leather sofa cleaning with specialized techniques to remove stains, odors and restore comfort.</p>
+                            <span class="service-price">From $129</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1598808872621-2c33a9f30c35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Window Cleaning">
-                    </div>
-                    <div class="service-content">
+                    
+                    <!-- Service 3: Window Cleaning -->
+                    <div class="service-card">
                         <div class="service-icon">
                             <i class="fas fa-window-maximize"></i>
                         </div>
-                        <h3>Window Cleaning</h3>
-                        <p>Complete window service including inside, outside, tracks, screens and sills for streak-free shine.</p>
-                        <span class="service-price">From $79</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="service-content">
+                            <h3>Window Cleaning</h3>
+                            <p>Complete window service including inside, outside, tracks, screens and sills for streak-free shine.</p>
+                            <span class="service-price">From $79</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1600857345488-3c6a779430ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Mattress Cleaning">
-                    </div>
-                    <div class="service-content">
+                    
+                    <!-- Service 4: Mattress Cleaning -->
+                    <div class="service-card">
                         <div class="service-icon">
                             <i class="fas fa-bed"></i>
                         </div>
-                        <h3>Mattress Cleaning</h3>
-                        <p>Deep sanitization and deodorizing to eliminate dust mites, allergens and stains for a healthier sleep environment.</p>
-                        <span class="service-price">From $99</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="service-content">
+                            <h3>Mattress Cleaning</h3>
+                            <p>Deep sanitization and deodorizing to eliminate dust mites, allergens and stains for a healthier sleep environment.</p>
+                            <span class="service-price">From $99</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Scotch Guarding">
-                    </div>
-                    <div class="service-content">
+                    
+                    <!-- Service 5: Scotch Guarding -->
+                    <div class="service-card">
                         <div class="service-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3>Scotch Guarding</h3>
-                        <p>Professional fabric protection treatment that repels stains and extends the life of your carpets and furniture.</p>
-                        <span class="service-price">From $49</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="service-content">
+                            <h3>Scotch Guarding</h3>
+                            <p>Professional fabric protection treatment that repels stains and extends the life of your carpets and furniture.</p>
+                            <span class="service-price">From $49</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="End of Lease Cleaning">
-                    </div>
-                    <div class="service-content">
+                    
+                    <!-- Service 6: End of Lease Cleaning -->
+                    <div class="service-card">
                         <div class="service-icon">
                             <i class="fas fa-home"></i>
                         </div>
-                        <h3>End of Lease Cleaning</h3>
-                        <p>Comprehensive bond cleaning service that meets all rental agreement requirements with a 100% satisfaction guarantee.</p>
-                        <span class="service-price">From $299</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="service-content">
+                            <h3>End of Lease Cleaning</h3>
+                            <p>Comprehensive bond cleaning service that meets all rental agreement requirements with a 100% satisfaction guarantee.</p>
+                            <span class="service-price">From $299</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Pressure Cleaning">
-                    </div>
-                    <div class="service-content">
+                    
+                    <!-- Service 7: Pressure Cleaning -->
+                    <div class="service-card">
                         <div class="service-icon">
                             <i class="fas fa-tint"></i>
                         </div>
-                        <h3>Pressure Cleaning</h3>
-                        <p>Professional cleaning for driveways, paths, fences, and exteriors using advanced equipment and techniques.</p>
-                        <span class="service-price">From $149</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="service-content">
+                            <h3>Pressure Cleaning</h3>
+                            <p>Professional cleaning for driveways, paths, fences, and exteriors using advanced equipment and techniques.</p>
+                            <span class="service-price">From $149</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
                     </div>
+                    
+                    <!-- Service 8: Carpet & Rug Cleaning (Repeat for seamless loop) -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Carpet & Rug Cleaning</h3>
+                            <p>Deep cleaning, sanitizing and deodorizing for all types of carpets and rugs using advanced extraction methods.</p>
+                            <span class="service-price">From $89</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 9: Lounge Cleaning (Repeat for seamless loop) -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-chair"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Lounge Cleaning</h3>
+                            <p>Fabric or leather sofa cleaning with specialized techniques to remove stains, odors and restore comfort.</p>
+                            <span class="service-price">From $129</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 10: Window Cleaning (Repeat for seamless loop) -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-window-maximize"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Window Cleaning</h3>
+                            <p>Complete window service including inside, outside, tracks, screens and sills for streak-free shine.</p>
+                            <span class="service-price">From $79</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 11: Mattress Cleaning (Repeat for seamless loop) -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Mattress Cleaning</h3>
+                            <p>Deep sanitization and deodorizing to eliminate dust mites, allergens and stains for a healthier sleep environment.</p>
+                            <span class="service-price">From $99</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 12: Scotch Guarding (Repeat for seamless loop) -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Scotch Guarding</h3>
+                            <p>Professional fabric protection treatment that repels stains and extends the life of your carpets and furniture.</p>
+                            <span class="service-price">From $49</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 13: End of Lease Cleaning (Repeat for seamless loop) -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>End of Lease Cleaning</h3>
+                            <p>Comprehensive bond cleaning service that meets all rental agreement requirements with a 100% satisfaction guarantee.</p>
+                            <span class="service-price">From $299</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 14: Pressure Cleaning (Repeat for seamless loop) -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Pressure Cleaning</h3>
+                            <p>Professional cleaning for driveways, paths, fences, and exteriors using advanced equipment and techniques.</p>
+                            <span class="service-price">From $149</span>
+                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
                 </div>
             </div>
         </div>
@@ -1505,6 +1669,46 @@
                 }
             });
         });
+        
+        // Carousel dot functionality
+        const dots = document.querySelectorAll('.dot');
+        const carousel = document.querySelector('.services-carousel');
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                // Remove active class from all dots
+                dots.forEach(d => d.classList.remove('active'));
+                // Add active class to clicked dot
+                dot.classList.add('active');
+                
+                // Pause animation temporarily
+                const currentAnimation = carousel.style.animation;
+                carousel.style.animation = 'none';
+                
+                // Calculate translate position based on index
+                const cardWidth = 280; // Width of each card + gap
+                const gap = 30;
+                const totalWidth = cardWidth + gap;
+                const translateX = -(totalWidth * index);
+                
+                // Apply transform
+                carousel.style.transform = `translateX(${translateX}px)`;
+                
+                // Resume animation after a brief delay
+                setTimeout(() => {
+                    carousel.style.animation = currentAnimation;
+                }, 3000);
+            });
+        });
+        
+        // Auto-update dots based on scroll position (approximate)
+        let currentDotIndex = 0;
+        setInterval(() => {
+            currentDotIndex = (currentDotIndex + 1) % dots.length;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentDotIndex);
+            });
+        }, 6428); // 45s / 7 cards = ~6.428s per card
         
         // Form submission handling
         const bookingForm = document.getElementById('bookingForm');
