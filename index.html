@@ -310,9 +310,14 @@
         }
         
         /* Services Carousel */
-        .services-carousel-container {
+        .services-carousel-outer {
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            padding: 0 80px; /* Added significant padding for arrow breathing room */
+        }
+        
+        .services-carousel-container {
             overflow: hidden;
             position: relative;
             padding: 40px 0;
@@ -403,50 +408,51 @@
             transform: scale(1.2);
         }
         
-        /* Carousel Navigation Arrows */
+        /* Carousel Navigation Arrows - FIXED WITH PROPER SPACING */
         .carousel-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(37, 99, 235, 0.92);
+            background: rgba(37, 99, 235, 0.95);
             color: white;
             border: none;
-            width: 55px;
-            height: 55px;
+            width: 65px;
+            height: 65px;
             border-radius: var(--radius-circle);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-            opacity: 0.95;
+            box-shadow: 0 6px 25px rgba(25, 75, 200, 0.45);
+            opacity: 0.92;
+            backdrop-filter: blur(4px);
         }
         
         .carousel-arrow:hover {
             background: var(--primary);
-            transform: translateY(-50%) scale(1.1);
+            transform: translateY(-50%) scale(1.12);
             opacity: 1;
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.55);
+            box-shadow: 0 8px 30px rgba(25, 75, 200, 0.6);
         }
         
         .carousel-arrow.prev {
-            left: -30px;
+            left: -20px; /* Positioned well within the padding area */
         }
         
         .carousel-arrow.next {
-            right: -30px;
+            right: -20px; /* Positioned well within the padding area */
         }
         
         .carousel-arrow i {
             position: relative;
-            left: 2px;
+            left: 3px;
         }
         
         .carousel-arrow.next i {
-            left: -2px;
+            left: -3px;
         }
         
         /* Pause animation on hover */
@@ -940,6 +946,10 @@
                 font-size: 1.35rem;
             }
             
+            .services-carousel-outer {
+                padding: 0 60px;
+            }
+            
             .services-carousel {
                 width: calc(250px * 14);
             }
@@ -950,17 +960,17 @@
             }
             
             .carousel-arrow {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
             }
             
             .carousel-arrow.prev {
-                left: 15px;
+                left: -15px;
             }
             
             .carousel-arrow.next {
-                right: 15px;
+                right: -15px;
             }
         }
         
@@ -1028,6 +1038,10 @@
                 margin-right: 5px;
             }
             
+            .services-carousel-outer {
+                padding: 0 40px;
+            }
+            
             .services-carousel {
                 width: calc(230px * 14);
                 gap: 20px;
@@ -1045,17 +1059,17 @@
             }
             
             .carousel-arrow {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
             }
             
             .carousel-arrow.prev {
-                left: 5px;
+                left: -10px;
             }
             
             .carousel-arrow.next {
-                right: 5px;
+                right: -10px;
             }
             
             .contact-form-container, .contact-info {
@@ -1092,6 +1106,10 @@
                 font-size: 1.7rem;
             }
             
+            .services-carousel-outer {
+                padding: 0 25px;
+            }
+            
             .services-carousel {
                 width: calc(280px * 14);
                 padding: 10px 0;
@@ -1106,12 +1124,18 @@
                 display: none;
             }
             
+            .carousel-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
             .carousel-arrow.prev {
-                left: -15px;
+                left: -5px;
             }
             
             .carousel-arrow.next {
-                right: -15px;
+                right: -5px;
             }
             
             .contact-form-container {
@@ -1175,206 +1199,209 @@
                 <p>Specialized cleaning solutions for every surface and space - all completed with eco-friendly products and professional equipment</p>
             </div>
             
-            <div class="services-carousel-container">
-                <button class="carousel-arrow prev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="carousel-arrow next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                
-                <div class="services-carousel" id="servicesCarousel">
-                    <!-- Service 1: Carpet & Rug Cleaning -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-couch"></i>
+            <!-- Added outer container for proper arrow spacing -->
+            <div class="services-carousel-outer">
+                <div class="services-carousel-container">
+                    <button class="carousel-arrow prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-arrow next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <div class="services-carousel" id="servicesCarousel">
+                        <!-- Service 1: Carpet & Rug Cleaning -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-couch"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Carpet & Rug Cleaning</h3>
+                                <p>Deep cleaning, sanitizing and deodorizing for all types of carpets and rugs using advanced extraction methods.</p>
+                                <span class="service-price">From $89</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
                         </div>
-                        <div class="service-content">
-                            <h3>Carpet & Rug Cleaning</h3>
-                            <p>Deep cleaning, sanitizing and deodorizing for all types of carpets and rugs using advanced extraction methods.</p>
-                            <span class="service-price">From $89</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
+                        
+                        <!-- Service 2: Lounge Cleaning -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-chair"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Lounge Cleaning</h3>
+                                <p>Fabric or leather sofa cleaning with specialized techniques to remove stains, odors and restore comfort.</p>
+                                <span class="service-price">From $129</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 3: Window Cleaning -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-window-maximize"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Window Cleaning</h3>
+                                <p>Complete window service including inside, outside, tracks, screens and sills for streak-free shine.</p>
+                                <span class="service-price">From $79</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 4: Mattress Cleaning -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Mattress Cleaning</h3>
+                                <p>Deep sanitization and deodorizing to eliminate dust mites, allergens and stains for a healthier sleep environment.</p>
+                                <span class="service-price">From $99</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 5: Scotch Guarding -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Scotch Guarding</h3>
+                                <p>Professional fabric protection treatment that repels stains and extends the life of your carpets and furniture.</p>
+                                <span class="service-price">From $49</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 6: End of Lease Cleaning -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>End of Lease Cleaning</h3>
+                                <p>Comprehensive bond cleaning service that meets all rental agreement requirements with a 100% satisfaction guarantee.</p>
+                                <span class="service-price">From $299</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 7: Pressure Cleaning -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Pressure Cleaning</h3>
+                                <p>Professional cleaning for driveways, paths, fences, and exteriors using advanced equipment and techniques.</p>
+                                <span class="service-price">From $149</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 8: Carpet & Rug Cleaning (Repeat for seamless loop) -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-couch"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Carpet & Rug Cleaning</h3>
+                                <p>Deep cleaning, sanitizing and deodorizing for all types of carpets and rugs using advanced extraction methods.</p>
+                                <span class="service-price">From $89</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 9: Lounge Cleaning (Repeat for seamless loop) -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-chair"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Lounge Cleaning</h3>
+                                <p>Fabric or leather sofa cleaning with specialized techniques to remove stains, odors and restore comfort.</p>
+                                <span class="service-price">From $129</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 10: Window Cleaning (Repeat for seamless loop) -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-window-maximize"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Window Cleaning</h3>
+                                <p>Complete window service including inside, outside, tracks, screens and sills for streak-free shine.</p>
+                                <span class="service-price">From $79</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 11: Mattress Cleaning (Repeat for seamless loop) -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Mattress Cleaning</h3>
+                                <p>Deep sanitization and deodorizing to eliminate dust mites, allergens and stains for a healthier sleep environment.</p>
+                                <span class="service-price">From $99</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 12: Scotch Guarding (Repeat for seamless loop) -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Scotch Guarding</h3>
+                                <p>Professional fabric protection treatment that repels stains and extends the life of your carpets and furniture.</p>
+                                <span class="service-price">From $49</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 13: End of Lease Cleaning (Repeat for seamless loop) -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>End of Lease Cleaning</h3>
+                                <p>Comprehensive bond cleaning service that meets all rental agreement requirements with a 100% satisfaction guarantee.</p>
+                                <span class="service-price">From $299</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 14: Pressure Cleaning (Repeat for seamless loop) -->
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="service-content">
+                                <h3>Pressure Cleaning</h3>
+                                <p>Professional cleaning for driveways, paths, fences, and exteriors using advanced equipment and techniques.</p>
+                                <span class="service-price">From $149</span>
+                                <a href="#contact" class="btn btn-primary">Book Now</a>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Service 2: Lounge Cleaning -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-chair"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Lounge Cleaning</h3>
-                            <p>Fabric or leather sofa cleaning with specialized techniques to remove stains, odors and restore comfort.</p>
-                            <span class="service-price">From $129</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
+                    <div class="carousel-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
                     </div>
-                    
-                    <!-- Service 3: Window Cleaning -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-window-maximize"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Window Cleaning</h3>
-                            <p>Complete window service including inside, outside, tracks, screens and sills for streak-free shine.</p>
-                            <span class="service-price">From $79</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 4: Mattress Cleaning -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-bed"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Mattress Cleaning</h3>
-                            <p>Deep sanitization and deodorizing to eliminate dust mites, allergens and stains for a healthier sleep environment.</p>
-                            <span class="service-price">From $99</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 5: Scotch Guarding -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Scotch Guarding</h3>
-                            <p>Professional fabric protection treatment that repels stains and extends the life of your carpets and furniture.</p>
-                            <span class="service-price">From $49</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 6: End of Lease Cleaning -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>End of Lease Cleaning</h3>
-                            <p>Comprehensive bond cleaning service that meets all rental agreement requirements with a 100% satisfaction guarantee.</p>
-                            <span class="service-price">From $299</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 7: Pressure Cleaning -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-tint"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Pressure Cleaning</h3>
-                            <p>Professional cleaning for driveways, paths, fences, and exteriors using advanced equipment and techniques.</p>
-                            <span class="service-price">From $149</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 8: Carpet & Rug Cleaning (Repeat for seamless loop) -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-couch"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Carpet & Rug Cleaning</h3>
-                            <p>Deep cleaning, sanitizing and deodorizing for all types of carpets and rugs using advanced extraction methods.</p>
-                            <span class="service-price">From $89</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 9: Lounge Cleaning (Repeat for seamless loop) -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-chair"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Lounge Cleaning</h3>
-                            <p>Fabric or leather sofa cleaning with specialized techniques to remove stains, odors and restore comfort.</p>
-                            <span class="service-price">From $129</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 10: Window Cleaning (Repeat for seamless loop) -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-window-maximize"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Window Cleaning</h3>
-                            <p>Complete window service including inside, outside, tracks, screens and sills for streak-free shine.</p>
-                            <span class="service-price">From $79</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 11: Mattress Cleaning (Repeat for seamless loop) -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-bed"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Mattress Cleaning</h3>
-                            <p>Deep sanitization and deodorizing to eliminate dust mites, allergens and stains for a healthier sleep environment.</p>
-                            <span class="service-price">From $99</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 12: Scotch Guarding (Repeat for seamless loop) -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Scotch Guarding</h3>
-                            <p>Professional fabric protection treatment that repels stains and extends the life of your carpets and furniture.</p>
-                            <span class="service-price">From $49</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 13: End of Lease Cleaning (Repeat for seamless loop) -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>End of Lease Cleaning</h3>
-                            <p>Comprehensive bond cleaning service that meets all rental agreement requirements with a 100% satisfaction guarantee.</p>
-                            <span class="service-price">From $299</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 14: Pressure Cleaning (Repeat for seamless loop) -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-tint"></i>
-                        </div>
-                        <div class="service-content">
-                            <h3>Pressure Cleaning</h3>
-                            <p>Professional cleaning for driveways, paths, fences, and exteriors using advanced equipment and techniques.</p>
-                            <span class="service-price">From $149</span>
-                            <a href="#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="carousel-dots">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
                 </div>
             </div>
         </div>
@@ -1436,7 +1463,7 @@
                 <div class="process-card">
                     <div class="step-number">3</div>
                     <div class="process-icon">
-                        <i class="fas fa-sparkles"></i> <!-- VERIFIED ICON PRESENT -->
+                        <i class="fas fa-sparkles"></i> <!-- VERIFIED ICON PRESENT AND VISIBLE -->
                     </div>
                     <h3>Enjoy Your Clean Space</h3>
                     <p>Relax in your freshly cleaned space with our 100% satisfaction guarantee. If you're not happy, we'll make it right.</p>
@@ -1752,7 +1779,7 @@
             });
         });
         
-        // Services Carousel with Arrows
+        // Services Carousel with Arrows - FIXED WITH PROPER SPACING
         const carousel = document.getElementById('servicesCarousel');
         const prevBtn = document.querySelector('.carousel-arrow.prev');
         const nextBtn = document.querySelector('.carousel-arrow.next');
