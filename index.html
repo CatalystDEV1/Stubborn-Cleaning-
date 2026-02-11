@@ -556,63 +556,200 @@
             margin-top: 5px;
         }
         
-        /* CTA Section */
-        .cta-section {
+        /* Contact Section */
+        .contact-section {
             background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1560448204-8cf87f3c39c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
             background-size: cover;
             background-position: center;
-            text-align: center;
-            color: white;
             padding: 100px 0;
+            color: white;
         }
         
-        .cta-content {
-            max-width: 750px;
-            margin: 0 auto;
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
         }
         
-        .cta-content h2 {
-            font-size: 3.2rem;
+        .contact-form-container {
+            background: white;
+            color: var(--secondary);
+            border-radius: var(--radius);
+            padding: 45px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-form-container h3 {
+            color: var(--secondary);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-form-container h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .form-group {
             margin-bottom: 25px;
         }
         
-        .cta-content p {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
         }
         
-        .cta-btn {
-            background: var(--accent);
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.05rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 18px 65px;
-            font-size: 1.35rem;
-            font-weight: 700;
-            border-radius: 50px;
             border: none;
+            width: 100%;
+            padding: 18px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.15rem;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-            display: inline-flex;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-info h3 {
+            font-size: 2.2rem;
+            margin-bottom: 35px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: var(--transition);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateX(5px);
+        }
+        
+        .info-card h4 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            display: flex;
             align-items: center;
             gap: 12px;
         }
         
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.55);
+        .info-card h4 i {
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+        
+        .info-card p, .info-card a {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            display: block;
+            margin-top: 8px;
+        }
+        
+        .info-card a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .info-card a:hover {
+            color: var(--accent);
+            transform: translateX(3px);
         }
         
         .guarantee-badge {
             background: white;
             color: var(--secondary);
-            display: inline-block;
-            padding: 8px 25px;
-            border-radius: 50px;
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-top: 25px;
             font-weight: 700;
-            margin-top: 20px;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
+            box-shadow: var(--shadow);
+        }
+        
+        .guarantee-badge i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 10px;
         }
         
         /* Footer */
@@ -718,69 +855,6 @@
             color: rgba(255, 255, 255, 0.6);
         }
         
-        /* Pressure Cleaning Special Section */
-        .pressure-cleaning {
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            margin: 50px 0;
-        }
-        
-        .pressure-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .pressure-header h3 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .pressure-technologies {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 40px;
-            gap: 30px;
-        }
-        
-        .tech-card {
-            flex: 1;
-            min-width: 250px;
-            max-width: 350px;
-            text-align: center;
-            padding: 30px;
-            border-radius: var(--radius);
-            background: var(--light);
-            transition: var(--transition);
-            border: 1px solid var(--light-gray);
-        }
-        
-        .tech-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
-        }
-        
-        .tech-icon {
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .tech-card h4 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--secondary);
-        }
-        
-        .tech-card p {
-            color: var(--gray);
-        }
-        
         /* Responsive Design */
         @media (max-width: 992px) {
             .hero h1 {
@@ -855,6 +929,10 @@
             .phone-btn i {
                 margin-right: 5px;
             }
+            
+            .contact-form-container, .contact-info {
+                padding: 30px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -885,6 +963,10 @@
             .logo-icon {
                 font-size: 1.7rem;
             }
+            
+            .contact-form-container {
+                padding: 25px;
+            }
         }
     </style>
 </head>
@@ -909,8 +991,8 @@
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="tel:+1234567890" class="phone-btn">
-                    <i class="fas fa-phone-alt"></i> (07) 3123 4567
+                <a href="tel:+61405010323" class="phone-btn">
+                    <i class="fas fa-phone-alt"></i> 0405 010 323
                 </a>
             </div>
         </div>
@@ -1033,28 +1115,19 @@
                         <a href="#contact" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Pressure Cleaning Special Section -->
-            <div class="pressure-cleaning">
-                <div class="pressure-header">
-                    <h3><i class="fas fa-tint"></i> Professional Pressure Cleaning</h3>
-                    <p>Advanced equipment for driveways, paths, fences, and exteriors</p>
-                </div>
-                <div class="pressure-technologies">
-                    <div class="tech-card">
-                        <div class="tech-icon">
-                            <i class="fas fa-microchip"></i>
-                        </div>
-                        <h4>ZD Pressure Washing</h4>
-                        <p>Zero-degree nozzle technology for tough stains and deep cleaning on concrete, brick and stone surfaces without damage.</p>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Pressure Cleaning">
                     </div>
-                    <div class="tech-card">
-                        <div class="tech-icon">
-                            <i class="fas fa-cogs"></i>
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-tint"></i>
                         </div>
-                        <h4>CNC Pressure Cleaning</h4>
-                        <p>Computerized nozzle control system that adjusts pressure and flow for delicate surfaces like wood decks and painted walls.</p>
+                        <h3>Pressure Cleaning</h3>
+                        <p>Professional cleaning for driveways, paths, fences, and exteriors using advanced equipment and techniques.</p>
+                        <span class="service-price">From $149</span>
+                        <a href="#contact" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
@@ -1204,16 +1277,111 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <div class="container cta-content">
-            <h2>Ready for a Spotless Space?</h2>
-            <p>Get your personalized quote today and experience the Stubborn Cleaning difference with our 100% satisfaction guarantee</p>
-            <button class="cta-btn">
-                <i class="fas fa-phone-volume"></i> Call Now: (07) 3123 4567
-            </button>
-            <div class="guarantee-badge">
-                <i class="fas fa-shield-alt"></i> 100% Satisfaction Guarantee
+    <!-- Contact Section with Booking Form -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">Book Your Cleaning Service</h2>
+                <p style="color: rgba(255,255,255,0.85);">Fill out the form below and we'll get back to you within 1 hour to confirm your booking</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-form-container">
+                    <h3>Request a Free Quote</h3>
+                    <form id="bookingForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="0405 010 323" value="0405 010 323" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" class="form-control" placeholder="your.email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service Required *</label>
+                                <select id="service" class="form-control" required>
+                                    <option value="" disabled selected>Select a service</option>
+                                    <option>Carpet & Rug Cleaning</option>
+                                    <option>Lounge Cleaning (Fabric)</option>
+                                    <option>Lounge Cleaning (Leather)</option>
+                                    <option>Mattress Cleaning</option>
+                                    <option>Window Cleaning</option>
+                                    <option>Scotch Guarding</option>
+                                    <option>Pressure Cleaning</option>
+                                    <option>End of Lease Cleaning</option>
+                                    <option>Complete Home Clean</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="property">Property Details *</label>
+                            <textarea id="property" class="form-control" placeholder="e.g., 3-bedroom house, 2 lounges, 15 windows, driveway size" required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date">Preferred Date *</label>
+                                <input type="date" id="date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Preferred Time *</label>
+                                <select id="time" class="form-control" required>
+                                    <option value="" disabled selected>Select time</option>
+                                    <option>Morning (7am - 12pm)</option>
+                                    <option>Afternoon (12pm - 5pm)</option>
+                                    <option>Evening (5pm - 8pm)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Additional Notes</label>
+                            <textarea id="message" class="form-control" placeholder="Any specific concerns or requirements?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Request Free Quote
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="info-card">
+                        <h4><i class="fas fa-map-marker-alt"></i> Service Areas</h4>
+                        <p>Brisbane Metro Area & Surrounds<br>Same-day bookings available</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4><i class="fas fa-clock"></i> Business Hours</h4>
+                        <p>Monday - Friday: 7am - 6pm<br>Saturday: 8am - 4pm<br>Sunday: Closed</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4><i class="fas fa-headset"></i> Direct Contact</h4>
+                        <p>Call or SMS for immediate assistance:<br><a href="tel:+61405010323">0405 010 323</a></p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4><i class="fas fa-shield-alt"></i> Our Guarantee</h4>
+                        <p>100% satisfaction guaranteed or we'll re-clean for free. All work is fully insured.</p>
+                    </div>
+                    
+                    <div class="guarantee-badge">
+                        <i class="fas fa-medal"></i>
+                        <span>PRICE MATCH GUARANTEE<br>+ 10% OFF FIRST CLEAN</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1268,7 +1436,7 @@
                         <div class="contact-icon">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <p>(07) 3123 4567</p>
+                        <p><a href="tel:+61405010323">0405 010 323</a></p>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -1337,6 +1505,32 @@
                 }
             });
         });
+        
+        // Form submission handling
+        const bookingForm = document.getElementById('bookingForm');
+        if(bookingForm) {
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const service = document.getElementById('service').value;
+                const date = document.getElementById('date').value;
+                
+                // Show success message
+                alert(`Thank you ${name}! Your booking request for ${service} on ${date} has been received. We'll call you within 1 hour to confirm.`);
+                
+                // Reset form
+                bookingForm.reset();
+            });
+        }
+        
+        // Set default date to tomorrow
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+        const formattedDate = tomorrow.toISOString().split('T')[0];
+        document.getElementById('date').value = formattedDate;
         
         // Initialize with scrolled class if not at top
         if(window.scrollY > 100) {
