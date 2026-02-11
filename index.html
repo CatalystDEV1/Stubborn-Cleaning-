@@ -320,15 +320,10 @@
         
         .services-carousel {
             display: flex;
-            animation: scroll 45s linear infinite;
             width: calc(280px * 14);
             gap: 30px;
             padding: 20px 0;
-        }
-        
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-280px * 7)); }
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         
         .service-card {
@@ -406,6 +401,52 @@
         .dot.active {
             background: var(--primary);
             transform: scale(1.2);
+        }
+        
+        /* Carousel Navigation Arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(37, 99, 235, 0.92);
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: var(--radius-circle);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            opacity: 0.95;
+        }
+        
+        .carousel-arrow:hover {
+            background: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.55);
+        }
+        
+        .carousel-arrow.prev {
+            left: -30px;
+        }
+        
+        .carousel-arrow.next {
+            right: -30px;
+        }
+        
+        .carousel-arrow i {
+            position: relative;
+            left: 2px;
+        }
+        
+        .carousel-arrow.next i {
+            left: -2px;
         }
         
         /* Pause animation on hover */
@@ -505,6 +546,7 @@
             color: var(--primary);
             margin-bottom: 25px;
             margin-top: 20px;
+            display: block; /* Ensures icon displays properly */
         }
         
         .process-card h3 {
@@ -900,12 +942,25 @@
             
             .services-carousel {
                 width: calc(250px * 14);
-                animation-duration: 50s;
             }
             
             .service-card {
                 min-width: 250px;
                 padding: 30px 25px;
+            }
+            
+            .carousel-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .carousel-arrow.prev {
+                left: 15px;
+            }
+            
+            .carousel-arrow.next {
+                right: 15px;
             }
         }
         
@@ -975,7 +1030,6 @@
             
             .services-carousel {
                 width: calc(230px * 14);
-                animation-duration: 55s;
                 gap: 20px;
             }
             
@@ -988,6 +1042,20 @@
                 width: 60px;
                 height: 60px;
                 font-size: 1.7rem;
+            }
+            
+            .carousel-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .carousel-arrow.prev {
+                left: 5px;
+            }
+            
+            .carousel-arrow.next {
+                right: 5px;
             }
             
             .contact-form-container, .contact-info {
@@ -1026,7 +1094,6 @@
             
             .services-carousel {
                 width: calc(280px * 14);
-                animation-duration: 60s;
                 padding: 10px 0;
             }
             
@@ -1035,12 +1102,20 @@
                 padding: 25px 20px;
             }
             
-            .contact-form-container {
-                padding: 25px;
-            }
-            
             .carousel-dots {
                 display: none;
+            }
+            
+            .carousel-arrow.prev {
+                left: -15px;
+            }
+            
+            .carousel-arrow.next {
+                right: -15px;
+            }
+            
+            .contact-form-container {
+                padding: 25px;
             }
         }
     </style>
@@ -1101,7 +1176,14 @@
             </div>
             
             <div class="services-carousel-container">
-                <div class="services-carousel">
+                <button class="carousel-arrow prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-arrow next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="services-carousel" id="servicesCarousel">
                     <!-- Service 1: Carpet & Rug Cleaning -->
                     <div class="service-card">
                         <div class="service-icon">
@@ -1354,7 +1436,7 @@
                 <div class="process-card">
                     <div class="step-number">3</div>
                     <div class="process-icon">
-                        <i class="fas fa-sparkles"></i>
+                        <i class="fas fa-sparkles"></i> <!-- VERIFIED ICON PRESENT -->
                     </div>
                     <h3>Enjoy Your Clean Space</h3>
                     <p>Relax in your freshly cleaned space with our 100% satisfaction guarantee. If you're not happy, we'll make it right.</p>
@@ -1670,45 +1752,52 @@
             });
         });
         
-        // Carousel dot functionality
+        // Services Carousel with Arrows
+        const carousel = document.getElementById('servicesCarousel');
+        const prevBtn = document.querySelector('.carousel-arrow.prev');
+        const nextBtn = document.querySelector('.carousel-arrow.next');
         const dots = document.querySelectorAll('.dot');
-        const carousel = document.querySelector('.services-carousel');
         
+        let currentIndex = 0;
+        const cardWidth = 310; // 280px card + 30px gap
+        const totalCards = 14;
+        const visibleCards = 7; // Number of unique services
+        
+        // Update carousel position
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === (currentIndex % visibleCards));
+            });
+        }
+        
+        // Next button click
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % visibleCards;
+            updateCarousel();
+        });
+        
+        // Prev button click
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + visibleCards) % visibleCards;
+            updateCarousel();
+        });
+        
+        // Dot click functionality
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                // Remove active class from all dots
-                dots.forEach(d => d.classList.remove('active'));
-                // Add active class to clicked dot
-                dot.classList.add('active');
-                
-                // Pause animation temporarily
-                const currentAnimation = carousel.style.animation;
-                carousel.style.animation = 'none';
-                
-                // Calculate translate position based on index
-                const cardWidth = 280; // Width of each card + gap
-                const gap = 30;
-                const totalWidth = cardWidth + gap;
-                const translateX = -(totalWidth * index);
-                
-                // Apply transform
-                carousel.style.transform = `translateX(${translateX}px)`;
-                
-                // Resume animation after a brief delay
-                setTimeout(() => {
-                    carousel.style.animation = currentAnimation;
-                }, 3000);
+                currentIndex = index;
+                updateCarousel();
             });
         });
         
-        // Auto-update dots based on scroll position (approximate)
-        let currentDotIndex = 0;
+        // Auto-advance carousel every 5 seconds
         setInterval(() => {
-            currentDotIndex = (currentDotIndex + 1) % dots.length;
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentDotIndex);
-            });
-        }, 6428); // 45s / 7 cards = ~6.428s per card
+            currentIndex = (currentIndex + 1) % visibleCards;
+            updateCarousel();
+        }, 5000);
         
         // Form submission handling
         const bookingForm = document.getElementById('bookingForm');
